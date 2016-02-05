@@ -25,6 +25,8 @@ class Session(models.Model):
    active = fields.Boolean(default=True)
    end_date = fields.Date(string="End Date", store=True,
         compute='_get_end_date', inverse='_set_end_date')
+   hours = fields.Float(string="Duration in hours",
+                         compute='_get_hours', inverse='_set_hours')
 
    @api.one
    @api.depends('seats', 'attendee_ids')
@@ -60,7 +62,7 @@ class Session(models.Model):
    @api.one
    @api.depends('duration', 'start_date')
    def _get_end_date(self):
-        print "_get_end_date++++++++++++++++"
+        print "_get_end_date+++++++++++++"
         if not (self.start_date and self.duration):
             self.end_date = self.start_date
             return
@@ -79,5 +81,13 @@ class Session(models.Model):
         # so add one day to get 5 days instead
         start_date = fields.Datetime.from_string(self.start_date)
         end_date = fields.Datetime.from_string(self.end_date)
-        self.duration = (end_date - start_date).days+1
+        self.duration = (end_date - start_date).days1
 
+   @api.one
+   @api.depends('duration')
+   def _get_hours(self):
+        self.hours = self.duration * 24
+
+   @api.one
+   def _set_hours(self):
+        self.duration = self.hours / 24
