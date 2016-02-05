@@ -29,7 +29,7 @@ class Session(models.Model):
                          compute='_get_hours', inverse='_set_hours')
    attendees_count = fields.Integer(
         string="Attendees count", compute='_get_attendees_count', store=True)
-
+   color = fields.Integer()
 
    @api.one
    @api.depends('seats', 'attendee_ids')
@@ -84,7 +84,7 @@ class Session(models.Model):
         # so add one day to get 5 days instead
         start_date = fields.Datetime.from_string(self.start_date)
         end_date = fields.Datetime.from_string(self.end_date)
-        self.duration = (end_date - start_date).days1
+        self.duration = (end_date - start_date).days + 1
 
    @api.one
    @api.depends('duration')
