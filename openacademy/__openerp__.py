@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 {
     'name': "openacademy",
 
@@ -10,7 +10,8 @@
     'website': "http://www.vauxoo.com",
 
     # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/master/openerp/addons/base/module/module_data.xml
+    # Check https://github.com/odoo/odoo/blob/master/openerp/addons/base
+    # /module/module_data.xml
     # for the full list
     'category': 'Uncategorized',
     'version': '0.1',
